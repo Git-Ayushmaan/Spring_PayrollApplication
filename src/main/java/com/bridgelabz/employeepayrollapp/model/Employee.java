@@ -18,6 +18,18 @@ public class Employee {
         this.salary = salary;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
     public Long getId() { return id; }
     public String getName() { return name; }
     public double getSalary() { return salary; }
