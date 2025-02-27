@@ -1,5 +1,6 @@
 package com.bridgelabz.employeepayrollapp.service;
 
+import com.bridgelabz.employeepayrollapp.exception.EmployeeNotFoundException;
 import com.bridgelabz.employeepayrollapp.model.Employee;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.Getter;
@@ -25,8 +26,9 @@ public class EmployeeService {
         return employeeList.stream()
                 .filter(emp -> emp.getId().equals(id))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id: " + id));
     }
+
 
     public Employee createEmployee(Employee employee) {
         // Simulate ID generation
