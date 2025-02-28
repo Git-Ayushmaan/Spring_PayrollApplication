@@ -2,9 +2,6 @@ package com.bridgelabz.employeepayrollapp.service;
 
 import com.bridgelabz.employeepayrollapp.exception.EmployeeNotFoundException;
 import com.bridgelabz.employeepayrollapp.model.Employee;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.ArrayList;
@@ -29,7 +26,6 @@ public class EmployeeService {
                 .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id: " + id));
     }
 
-
     public Employee createEmployee(Employee employee) {
         // Simulate ID generation
         employee.setId(idCounter.incrementAndGet());
@@ -38,15 +34,18 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Long id, Employee employeeDetails) {
+        // If employee is not found, getEmployeeById() will throw EmployeeNotFoundException.
         Employee employee = getEmployeeById(id);
-        if (employee != null) {
-            employee.setName(employeeDetails.getName());
-            employee.setSalary(employeeDetails.getSalary());
-        }
+        // Update necessary fields
+        employee.setName(employeeDetails.getName());
+        employee.setSalary(employeeDetails.getSalary());
+        // Optionally, update other fields if needed.
         return employee;
     }
 
     public void deleteEmployee(Long id) {
-        employeeList.removeIf(emp -> emp.getId().equals(id));
+        // Ensure employee exists; if not, an exception is thrown.
+        Employee employee = getEmployeeById(id);
+        employeeList.remove(employee);
     }
 }
