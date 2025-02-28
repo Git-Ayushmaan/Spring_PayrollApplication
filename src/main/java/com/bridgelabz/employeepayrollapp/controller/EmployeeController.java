@@ -31,12 +31,13 @@ public class EmployeeController {
 
     @PostMapping("/create")
     public Employee createEmployee(@Valid @RequestBody Employee employee) {
-        // Validation is triggered by @Valid before reaching the service
+        log.info("Creating employee: {}", employee);
         return service.createEmployee(employee);
     }
 
     @PutMapping("/update/{id}")
     public Employee updateEmployee(@PathVariable Long id, @Valid @RequestBody Employee employee) {
+        log.info("Updating employee with ID: {}", id);
         return service.updateEmployee(id, employee);
     }
 
